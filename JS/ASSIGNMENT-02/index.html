@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5 bg-dark text-white">Weather App Info</h1>
+        <div class="btyui">
+        <center><input type="text" id="city" placeholder="Enter Your City"></center>
+        <center><button id="btn" onclick="getWeather()">Get-Weather</button></center>
+       </div>
+       <center><h2><div id="result"></div></h2></center>
+    </div>
+
+    <script>
+
+        function getWeather(){
+            event.preventDefault();
+            let city = document.getElementById("city").value;
+            let url = `https://api.openweathermap.org/data/2.5/weather?q=
+            ${city}&appid=0e9de26bc06bd8c05fc20a119205f2ec`;
+
+            fetch(url)
+            .then((res) => res.json())
+            .then((data) => {
+                let temp = data.main.temp - 273.15;
+                temp = temp.toFixed(2);
+                document.getElementById("result").textContent = `Weather in ${city} is ${data.main.temp - 273.15} °C`;
+            });
+        }
+    </script>
+</body>
+</html>

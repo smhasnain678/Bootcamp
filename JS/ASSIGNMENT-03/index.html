@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    
+</head>
+<body>
+    <center><div>
+        <h2 class="pb-2 mt-3">Database Form</h2>
+    <form action="/submit" method="post" id="userForm">
+        <label for="name" >Name:</label>
+        <input type="text" class="w-50 p-1" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" class="w-50 p-1" id="email" name="email" required><br><br>
+
+        <input type="submit" class="btn btn-danger" value="Submit">
+    </form>
+
+
+
+         <h2>Entered Information</h2>
+        <div id="userInfo"></div>
+
+                     <script>
+        document.addEventListener('DOMContentLoaded', function () {            
+            fetch('/demo',{
+                method: 'GET'
+            })
+            .then(response => {
+                if (!response.ok) {
+                 throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                 document.getElementById('userInfo').textContent = JSON.stringify(data);
+            })
+            .then(data => {
+                const userInfo = document.getElementById('userInfo');
+                const listItem = document.createElement('li');
+                listItem.textContent = `ID: ${data.id}, Name: ${data.name}, Email: ${data.email}`;
+                userInfo.appendChild(listItem);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            });
+        </script>
+
+
+    <!-- </form> 
+        <div class="table-responsive w-75">
+            <h2 class="pb-2 mt-3">Show Data</h2>
+            <table class="table table-bordered">
+                <tr>
+                    <th class="bg-dark text-white">id</th>
+                    <th class="bg-dark text-white">Name</th>
+                    <th class="bg-dark text-white">Email</th>
+                </tr>
+            </table>
+        </div> -->
+    
+</div>
+</center>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Email App</title>
+</head>
+<body>
+    <h1>Enter Name and Email</h1>
+    <form id="userForm" action='/submit' method="post">
+        <input type="text" id="name" name="name" placeholder="Name" required><br>
+        <input type="email" id="email" name="email" placeholder="Email" required><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Entered Information</h2>
+    <ul id="userInfo"></ul>
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            fetch('/addUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `name=${name}&email=${email}`,
+            })
+            .then(response => response.json())
+            .then(data => {
+                const userInfo = document.getElementById('userInfo');
+                const listItem = document.createElement('li');
+                listItem.textContent = `ID: ${data.id}, Name: ${data.name}, Email: ${data.email}`;
+                userInfo.appendChild(listItem);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html> -->

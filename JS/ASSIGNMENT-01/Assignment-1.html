@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment-1</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .text-col{
+            margin-top: 10%;
+        }
+        #topArray{
+            border: 1px solid black;
+            font-size: 20px;
+            width: 40%;
+            height: 20vh;
+            border-radius: 8px;
+            margin-left: 40%;
+            position: fixed;
+            margin-top: 8%;
+            text-align: center;
+            align-items: center;
+        }
+        input{
+            padding: 6px;
+            width: 30%;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 15px;
+        }
+        .container h6{
+            text-align: center;
+            /* font-size: 15px; */
+            margin-top: 3%;
+            padding: 8px;
+            width: 25%;
+            margin-left: 35%;
+            border-radius: 5px;
+            background-color: rgb(65, 79, 77);
+            color: white;
+        }
+        @media (max-width: 799px){
+            .container h6 {
+                font-size: 15px;
+                width: 35%;
+                }
+            #topArray {
+                border: 1px solid black;
+                font-size: 15px;
+                width: 40%;
+                height: 5vh;
+                text-align: center;
+            }
+                    }
+    </style>
+    <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h6>Assignment-1</h6>
+        <div id="topArray"></div>
+        <div class="text-col">
+        <input type="number" id="userSearch" placeholder="Search value" required><br><br>
+        <button id="search" class="btn btn-primary">Search</button><br><br>
+        <input type="number" id="userInput" placeholder="Enter number" required><br><br>
+        <button id="addIn1st" class="btn btn-danger">AddInFirst</button>
+        <button id="addInLast" class="btn btn-danger">AddInLast</button>
+        <button id="delete1st" class="btn btn-primary">Delete1st</button>
+        <button id="deleteLast" class="btn btn-primary">DeleteLast</button>
+    </div>
+    </div>
+
+    <script>
+        let userSearch = document.getElementById("userSearch");
+        let userInput = document.getElementById("userInput");
+        
+        let addIn1st = document.getElementById("addIn1st");
+        let addInLast = document.getElementById("addInLast");
+        let delete1st = document.getElementById("delete1st");
+        let deleteLast = document.getElementById("deleteLast")
+        
+        let search = document.getElementById("search");
+        
+        let topArray = document.getElementById("topArray");
+         
+        // ES6
+        let anarray = [1,2,3,4,5];
+        topArray.innerHTML = `Array = [${anarray}]`;
+        // Add in First
+        addIn1st.addEventListener('click',()=>{
+            if(userInput.value != ""){
+                anarray.unshift(userInput.value);
+                topArray.innerHTML = `Array = [${anarray}]`;
+                userInput.value = "";
+            }else{
+                alert("Please input value!");
+            }
+        })
+        // Add in Last
+        addInLast.addEventListener('click',()=>{
+            if(userInput.value != ""){
+               anarray.push(userInput.value);
+                topArray.innerHTML = `Array = [${anarray}]`;
+                userInput.value = "";
+            }else{
+                alert("Please input value!");
+            }
+        })
+        // Delete in 1st
+        delete1st.addEventListener('click',()=>{
+           anarray.shift();
+           topArray.innerHTML = `Array = [${anarray}]`;
+        })
+        // Delete in Last
+        deleteLast.addEventListener('click',()=>{
+           anarray.pop();
+           topArray.innerHTML = `Array = [${anarray}]`;
+        })
+        // Searching 
+        search.addEventListener('click',()=>{
+            for(let i=0; i<anarray.length; i++){
+                val = anarray[i];
+                if(userSearch.value == val){
+                    alert("Value Successfully Found");
+                    break;
+                }
+            }
+            if(userSearch.value != val){
+                alert("Value not Found!");
+            } 
+        })
+        
+        </script>
+</body>
+</html>
